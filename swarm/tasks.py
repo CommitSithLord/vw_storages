@@ -75,7 +75,7 @@ def download_and_upload(video_url):
     url = 'https://dev.api.cast.video.wiki/bzz?name=' + str(file)
     print(url,"urrll")
     headers = {
-        'swarm-postage-batch-id': '126b57245bb9d917c3b9b4fb7f48e945043c22b675cd44a36f2d39947465b5fd',
+        'swarm-postage-batch-id': '72bf988faf80cf1e962f210687f5c4193b66726e37c3f417b6685a6915d6a0f9',
         'Content-Type': 'video/webm'
     }
     with open(download_path, 'rb') as file:
