@@ -72,18 +72,24 @@ def download_and_upload(video_url):
         file.write(response.content)
 
     # Upload the downloaded file to the Swarm API
-    url = 'https://dev.api.cast.video.wiki/bzz?name=' + str(file)
-    print(url,"urrll")
+    url = f'https://dev.api.cast.video.wiki/bzz?name={file_name}'
+    print(url, "urrll")
     headers = {
         'swarm-postage-batch-id': '72bf988faf80cf1e962f210687f5c4193b66726e37c3f417b6685a6915d6a0f9',
         'Content-Type': 'video/webm'
     }
-    with open(download_path, 'rb') as file:
-        upload_response = requests.post(url, headers=headers, data=file)
-    print(url, file)
-    # Remove the downloaded file after upload
-    os.remove(download_path)
-    print(upload_response)
+    try:
+        with open(download_path, 'rb') as file:
+            upload_response = requests.post(url, headers=headers, data=file)
+        print("Status Code:", upload_response.status_code)
+        print("Response Headers:", upload_response.headers)
+        print("Response Body:", upload_response.text)  # Use `.text` to get the raw response or `.json()` for JSON content if available.
+    except Exception as e:
+        print("Error during upload:", str(e))
+    finally:
+        # Remove the downloaded file after upload
+        os.remove(download_path)
+
     return upload_response.json(), upload_response.status_code
 
 @shared_task
