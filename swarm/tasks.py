@@ -135,6 +135,7 @@ def download_video_task(file_name):
 def download_file(hash):
     url = f'https://dev.api.cast.video.wiki/bzz/{hash}'
     response = requests.get(url)
+    print(response)
     if response.status_code == 200:
         binary_data = response.content
         encoded_data = base64.b64encode(binary_data).decode('utf-8')
